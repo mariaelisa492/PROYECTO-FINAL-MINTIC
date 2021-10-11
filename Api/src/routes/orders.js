@@ -1,25 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-//registrarse
-router.post('/signup', async(req, res) =>{
-    try {
-        
-    } catch (error) {
-        
-    }
-});
-
-//logearse
-router.post('/login', async(req, res) =>{
-    try {
-        
-    } catch (error) {
-        
-    }
-});
-
-//todos los usuarios
+//obtener todas las ordenes
 router.get('/', async(req, res) =>{
     try {
         
@@ -28,8 +10,8 @@ router.get('/', async(req, res) =>{
     }
 });
 
-//obtener usuario
-router.get('/:id', async(req, res) =>{
+//obtener todas las ordenes de un vendedor
+router.get('/userOrders', async(req, res) =>{
     try {
         
     } catch (error) {
@@ -37,8 +19,26 @@ router.get('/:id', async(req, res) =>{
     }
 });
 
-//actualizar usuario
+//creo una orden
+router.post('/create', async(req, res) =>{
+    try {
+        
+    } catch (error) {
+        
+    }
+});
+
+//actualizo orden
 router.put('/:id', async(req, res) =>{
+    try {
+        
+    } catch (error) {
+        
+    }
+});
+
+//actualizo orden
+router.delete('/:id', async(req, res) =>{
     try {
         
     } catch (error) {
