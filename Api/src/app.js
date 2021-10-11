@@ -1,7 +1,7 @@
 const express = require('express');  //server
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan'); //middlewere
-// const routes = require('./routes/index.js');
+const routes = require('./routes/index');
 
 require('./db.js');
 
@@ -21,7 +21,7 @@ server.use((req, res, next) => {   //esto me permite hacer peticiones del tipo g
     next();
 });
 
-// server.use('/', routes);
+server.use('/', routes);
 
 
 // Error catching endware.
