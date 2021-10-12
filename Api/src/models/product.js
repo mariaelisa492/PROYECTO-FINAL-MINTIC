@@ -15,7 +15,7 @@ const ProductSchema = new Schema({
     },
     stock: {
         type: Number,
-        required: true 
+        required: true
     },
     price: {
         type: Number,
@@ -25,10 +25,10 @@ const ProductSchema = new Schema({
         type: Boolean,
         default: true
     },
-    seller: { 
-        type: Schema.Types.ObjectId, 
-        ref: "User", 
-        required: true 
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
     updated: Date,
     created: {

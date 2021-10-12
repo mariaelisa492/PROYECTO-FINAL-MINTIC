@@ -1,9 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router';
 import {Login} from './pages/Login';
-import {Home} from './pages/Home'
+import {Home} from './pages/Home';
+import {Products} from './pages/Products';
+
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <Switch>
       <Route exact path = "/" component={Login}/>
       <Route exact path = "/home" component={Home}/>
+      <Route exact path = "/products" component={Products}/>
+
       </Switch>
     </div>
   );

@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import store from './store/index'
 import { Provider } from 'react-redux';
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 ReactDOM.render(
   <Provider store={store}>
