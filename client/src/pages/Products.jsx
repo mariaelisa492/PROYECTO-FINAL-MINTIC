@@ -1,6 +1,11 @@
+import { Link } from 'react-router-dom'
+import Sidebar from '../components/SideBar/SideBar'
+
 export const Products = () => {
     return(
-        <div className="productscss">
+        <div >
+            <Sidebar/>
+            <div className="productscss">
             <form action="post" id="form-product-register">
                 <div class="row g-3">
                     <div class="col-md-3">
@@ -37,5 +42,6 @@ export const Products = () => {
                 </div>
             </form>
         </div>
+    </div>
     )
 }

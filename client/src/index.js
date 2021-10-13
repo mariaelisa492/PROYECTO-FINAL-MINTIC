@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+//import 'https://fonts.googleapis.com/css2?family=Material+Icons+Outlined'
 
 ReactDOM.render(
   <Provider store={store}>
