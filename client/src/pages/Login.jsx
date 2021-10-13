@@ -1,12 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { FormLogin } from '../components/FormLogin/FormLogin'
+
 
 export const Login = () => {
     return (
         <div>
-            <Link to={'/home'}>
-            Soy el Login
-            </Link>
+            
+            <FormLogin/>
+
         </div>
     )
 }
