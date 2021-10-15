@@ -15,6 +15,9 @@
 
 
 .productscss{
+  position:  absolute;
+  left:  14rem;
+  top:  0px;
   align-items: center;
   text-decoration: none;
   padding: 30px;
