@@ -1,49 +1,44 @@
 const { Router } = require('express');
 const router = Router();
+const users = require ('../controllers/users');
 
 //registrarse
-router.post('/signup', async(req, res) =>{
-    try {
-        
-    } catch (error) {
-        
-    }
-});
+router.post('/signup', users.createUser);
 
-//logearse
-router.post('/login', async(req, res) =>{
-    try {
+// //logearse
+// router.post('/login', async(req, res) =>{
+//     try {
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-});
+//     }
+// });
 
-//todos los usuarios
-router.get('/', async(req, res) =>{
-    try {
+// //todos los usuarios
+// router.get('/', async(req, res) =>{
+//     try {
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-});
+//     }
+// });
 
-//obtener usuario
-router.get('/:id', async(req, res) =>{
-    try {
+// //obtener usuario
+// router.get('/:id', async(req, res) =>{
+//     try {
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-});
+//     }
+// });
 
-//actualizar usuario
-router.put('/:id', async(req, res) =>{
-    try {
+// //actualizar usuario
+// router.put('/:id', async(req, res) =>{
+//     try {
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-});
+//     }
+// });
 
 module.exports = router;

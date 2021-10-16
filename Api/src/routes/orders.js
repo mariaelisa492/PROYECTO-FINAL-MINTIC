@@ -1,49 +1,38 @@
 const { Router } = require('express');
 const router = Router();
+const orders = require ('../controllers/orders');
 
 //obtener todas las ordenes
-router.get('/', async(req, res) =>{
-    try {
-        
-    } catch (error) {
-        
-    }
-});
+router.get('/', orders.ordersAll );
 
 //obtener todas las ordenes de un vendedor
-router.get('/userOrders', async(req, res) =>{
-    try {
+// router.get('/userOrders', async(req, res) =>{
+//     try {
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-});
+//     }
+// });
 
 //creo una orden
-router.post('/create', async(req, res) =>{
-    try {
-        
-    } catch (error) {
-        
-    }
-});
+router.post('/create', orders.createOrder);
 
 //actualizo orden
-router.put('/:id', async(req, res) =>{
-    try {
+// router.put('/:id', async(req, res) =>{
+//     try {
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-});
+//     }
+// });
 
 //actualizo orden
-router.delete('/:id', async(req, res) =>{
-    try {
+// router.delete('/:id', async(req, res) =>{
+//     try {
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-});
+//     }
+// });
 
 module.exports = router;
