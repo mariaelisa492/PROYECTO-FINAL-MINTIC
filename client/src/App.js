@@ -1,27 +1,19 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router';
-import {Login} from './pages/Login';
-import {Products} from './pages/Products';
-import {Home} from './pages/Home';
-import {getProducts} from './redux/actions/index'
-import {useDispatch} from 'react-redux'
+import { Login } from './pages/Login';
+import { Products } from './pages/Products';
+import { Seller } from './pages/Seller';
+import { Sales } from './pages/Sales';
 
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    dispatch(getProducts())
-  },[dispatch]) 
-
   return (
     <div className="App">
       <Switch>
-      <Route exact path = "/" component={Login}/>
-      <Route exact path = "/home" component={Home}/>
-      <Route exact path = "/products" component={Products}/>
-      <Route exact path = "/create" component={Products}/>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/sales" component={Sales} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/sellers" component={Seller} />
       </Switch>
     </div>
   );

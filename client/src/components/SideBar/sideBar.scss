@@ -1,53 +1,71 @@
-$black : #000000;
-
+$black: #000000;
 .sidebar {
-    width: 14rem;
-    height: calc(100vh);
-    border-right: 1px solid $black;
-    background-color: #050303;
-    ul {
-        list-style: none;
-        
-        li {
-           
-            // font-family: Abel;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 22px;
-            line-height: 28px;
-            width: 10rem;
-            color: #FFFFFF;
-            text-align: center;
-            
-            
-         
-            a {
-                text-decoration: none;
-                display: block;
-                padding: 0.5rem 1rem;
-                
-                &:link {
-                    color: #FFFFFF;
-                    
-                }
-                &:visited{
-                    color:#FFFFFF;
-                }
-                &:focus,&:hover{
-                    border: 1px solid;
-                        border-style: groove;
-                        border-color: #3939FC;
-                        border-radius: 5px;
-                        background: #3939FC;
-                }      
-                &:active {
-                    color: #3939FC;
-                    background: #3939FC;
-                    
-                }
-                
-            }
-        }
+  width: 14rem;
+  height: calc(100vh);
+  border-right: 1px solid $black;
+  background-color: #050303;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
+  img {
+    margin-top: 30px;
+  }
+  h3 {
+    margin-top: 20px;
+    font-size: 25px;
+    color: white;
+  }
+  ul {
+    list-style: none;
+    margin: 20px 0px 0px 10px;
+
+    li {
+      // font-family: Abel;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 22px;
+      line-height: 28px;
+      width: 10rem;
+      color: #ffffff;
+      text-align: center;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 10px auto;
+
+      a {
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem 0rem;
+
+        &:link {
+          color: #ffffff;
+        }
+        &:visited {
+          color: #ffffff;
+        }
+        &:focus,
+        &:hover {
+          border: 1px solid;
+          border-style: groove;
+          border-color: #3939fc;
+          border-radius: 5px;
+          background: #3939fc;
+        }
+        &:active {
+          color: #3939fc;
+          background: #3939fc;
+        }
+      }
     }
+  }
+  h4{
+      font-size: 22px;
+      margin-bottom: 30px;
+      a{
+        text-decoration: none;
+        color: white;
+      }
+  }
 }

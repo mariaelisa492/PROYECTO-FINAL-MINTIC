@@ -61,6 +61,52 @@ const updateProduct = async (req, res) => {
         error: 'Your request could not be processed. Please try again.'
         })
     };
+};
+
+const getProductByName = async (req, res) => { 
+    const {name} = req.query;
+    console.log(name)
+    try {
+        const products = await Products.find({'name': {'$regex': name,$options:'i'}})
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(404).json({ 
+            message: "Cannot get the product by name"
+        });
+    }
+};
+
+const deleteProduct = async (req, res) => {
+    const { id } = req.params;
+
+    try{
+        await Products.findOneAndRemove({_id: id});
+        res.status(200).json({
+            message: 'Successful'
+        });
+    }
+
+    catch(error){
+        console.log(error)
+        res.status(400).json({
+            message: 'Your request could not be processed. Please try again.'
+        })
+    };
+};
+
+const createManyProducts = async (req, res) => {
+    try{
+        await Products.insertMany(req.body)
+        res.status(200).json({
+            message: 'Successful'
+        });
+    }
+    catch{
+        console.log(error)
+        res.status(400).json({
+            message: 'Your request could not be processed. Please try again.'
+        })
+    }
 }   
 
 
@@ -68,5 +114,8 @@ module.exports = {
     createProduct,
     productsAll,
     getProduct,
-    updateProduct
+    updateProduct,
+    getProductByName,
+    deleteProduct,
+    createManyProducts
 }
