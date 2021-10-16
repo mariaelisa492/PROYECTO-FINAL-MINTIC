@@ -1,47 +1,102 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Sidebar from '../components/SideBar/SideBar'
+import React, { useEffect, useState } from 'react';
+import { ItemList } from '../components/ItemList/ItemList';
+import Sidebar from "../components/SideBar/SideBar";
+import "./products.scss"
+import { useDispatch, useSelector } from 'react-redux'
+import { createProduct, deleteProduct } from "../redux/actions/index";
+import { getProducts } from '../redux/actions'
+import { MdDeleteForever } from 'react-icons/md';
+import { FaRegEdit } from 'react-icons/fa';
+import { Button, Modal} from "react-bootstrap";
+import {FormProduct} from "../components/FormProduct/FormProduct"
 
 export const Products = () => {
-    return(
-        <div >
-            <div className="productscss">
-            <form action="post" id="form-product-register">
-                <div class="row g-3">
-                    <div class="col-md-3">
-                        <label for="formGroupProducts" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" placeholder="Nombre del objeto a vender" required/>
-                    </div>
-                    <div class="col-md-12">
-                    <label for="formGroupProducts" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" placeholder="Descripción del producto, datos específicos, que incluye, garantia, etc." required/>
-                    </div>
-                    <div class="col-md-12">
-                    <label for="formGroupProducts" class="form-label">Imagen</label>
-                        <input type="text" class="form-control" placeholder="URL de la imagen"  required/>
-                    </div>
-                    <div class="col-md-3">
-                    <label for="formGroupProducts" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" placeholder="1" required/>
-                    </div>
-                    <div class="col-md-3">
-                    <label for="formGroupProducts" class="form-label">Precio unitario</label>
-                        <input type="number" class="form-control" placeholder="$1,000" required/>
-                    </div>
-                    <div className="slidder">
-                        <label for="formGroupProducts" class="form-label" className="labelS">Disponibilidad</label>
-                        <br />
-                        <label class="switch">
-                            <input type="checkbox" required />
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-6" className="submitProduct">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
+
+    //estados de intput y errores
+    const [inputProducts, setInputProducts] = useState({
+        name: '',
+        description: '',
+        // image: '',
+        price: '',
+        stock: '',
+    });
+    const [show, setShow] = useState(false);
+    const dispatch = useDispatch()
+    const items = useSelector(state => state.products)
+    const titleTable = "Products"
+    const columns = [
+        {
+            name: "Name",
+            selector: "name",
+            sortable: true
+        },
+        {
+            name: "Price",
+            selector: "price",
+            sortable: true
+        },
+        {
+            name: "Stock",
+            selector: "stock",
+            sortable: true
+        },
+        {
+            name: "Description",
+            selector: "description",
+            sortable: true
+        },
+        {
+            name: "Actions",
+            cell: row => (<div className="actions"><button type="button" onClick={() => dispatch(deleteProduct(row._id))}><FaRegEdit /></button><button type="button" onClick={() => dispatch(deleteProduct(row._id))}><MdDeleteForever /></button></div>)
+        }
+    ]
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [dispatch])
+
+    const handleClose = () => {
+        setInputProducts({
+            name: '',
+            description: '',
+            // image: '',
+            price: '',
+            stock: '',
+        });
+        setShow(false)
+      };
+
+      const handleCreateProduct = () => {
+          dispatch(createProduct(inputProducts))
+          handleClose()
+      }
+
+    return (
+        <>
+            <div className="container-products">
+                <div>
+                    <Sidebar />
                 </div>
-            </form>
-        </div>
-    </div>
+                <div className="list__product">
+                    {items.length > 0 ? <ItemList columns={columns} items={items} titleTable={titleTable} setShow={setShow}/> : <h2>Cargando</h2>}
+                </div>
+            </div>
+            <Modal show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create product</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <FormProduct inputProducts={inputProducts} setInputProducts={setInputProducts}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleCreateProduct}>
+                        Create
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     )
 }

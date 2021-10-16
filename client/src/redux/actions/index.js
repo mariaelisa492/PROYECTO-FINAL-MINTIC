@@ -49,6 +49,16 @@ export const deleteProduct = (id) => {
     }
 }
 
+export const createProduct = (objProduct) => {
+    return async () => {
+        try {
+            await axios.post(`${LOCALHOST_URL}/products/create`, objProduct)
+        } catch (error) {
+            console.log("Error al crear producto")   
+        }
+    }
+}
+
 // // FILTROS Y ORDENAMIENTOS //
 // export const getProductsByPriceAsc = () => {
 //     return {
