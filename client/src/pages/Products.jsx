@@ -4,7 +4,7 @@ import Sidebar from "../components/SideBar/SideBar";
 import "./products.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { createProduct, deleteProduct } from "../redux/actions/index";
-import { getProducts } from '../redux/actions'
+// import { getProducts } from '../redux/actions'
 import { MdDeleteForever } from 'react-icons/md';
 import { FaRegEdit } from 'react-icons/fa';
 import { Button, Modal} from "react-bootstrap";
@@ -19,11 +19,13 @@ export const Products = () => {
         // image: '',
         price: '',
         stock: '',
+        sellerDocument: ''
     });
     const [show, setShow] = useState(false);
-    const dispatch = useDispatch()
-    const items = useSelector(state => state.products)
-    const titleTable = "Products"
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.products);
+    const [items, setItems] = useState(products);
+    const titleTable = "Products";
     const columns = [
         {
             name: "Name",
@@ -46,14 +48,20 @@ export const Products = () => {
             sortable: true
         },
         {
+            name: "Seller document",
+            selector: "sellerDocument",
+            sortable: true
+        },
+        {
             name: "Actions",
-            cell: row => (<div className="actions"><button type="button" onClick={() => dispatch(deleteProduct(row._id))}><FaRegEdit /></button><button type="button" onClick={() => dispatch(deleteProduct(row._id))}><MdDeleteForever /></button></div>)
+            cell: row => (<div className="actions"> <button type="button"><FaRegEdit /></button><button type="button" onClick={() => handleDeleteProduct(row)}><MdDeleteForever /></button></div>)
         }
     ]
 
     useEffect(() => {
-        dispatch(getProducts())
-    }, [dispatch])
+        // dispatch(getProducts())
+        setItems(products)
+    }, [products])
 
     const handleClose = () => {
         setInputProducts({
@@ -62,13 +70,18 @@ export const Products = () => {
             // image: '',
             price: '',
             stock: '',
+            sellerDocument: ''
         });
         setShow(false)
       };
 
       const handleCreateProduct = () => {
-          dispatch(createProduct(inputProducts))
+          dispatch(createProduct(inputProducts));
           handleClose()
+      }
+
+      const handleDeleteProduct = (row) => {
+        dispatch(deleteProduct(row._id));
       }
 
     return (
@@ -78,7 +91,7 @@ export const Products = () => {
                     <Sidebar />
                 </div>
                 <div className="list__product">
-                    {items.length > 0 ? <ItemList columns={columns} items={items} titleTable={titleTable} setShow={setShow}/> : <h2>Cargando</h2>}
+                    <ItemList columns={columns} items={items} titleTable={titleTable} setShow={setShow}/>
                 </div>
             </div>
             <Modal show={show} onHide={handleClose} animation={false}>

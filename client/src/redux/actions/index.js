@@ -1,9 +1,6 @@
 import axios from "axios";
 import {
-    LOCALHOST_URL, GET_BYNAME,
-    ORDER_PRICE_ASC, ORDER_PRICE_DESC,
-    FILTER_PRICE_ONLY_LESSTHAN, FILTER_PRICE_ONLY_MORETHAN,
-    FILTER_PRICE_RANGE, GET_PRODUCTS
+    LOCALHOST_URL, GET_BYNAME, GET_PRODUCTS
 } from "../constants/index"
 
 export const getProducts = () => {
@@ -40,7 +37,7 @@ export const deleteProduct = (id) => {
             const deleteProd = await axios.delete(`http://localhost:5000/products/${id}`);
             return dispatch({
                 type: "DELETE_PRODUCT",
-                payload: deleteProd,
+                payload: deleteProd.data.remove,
             })
         }
         catch (error) {
@@ -50,45 +47,15 @@ export const deleteProduct = (id) => {
 }
 
 export const createProduct = (objProduct) => {
-    return async () => {
+    return async (dispatch) => {
         try {
-            await axios.post(`${LOCALHOST_URL}/products/create`, objProduct)
+            const products = await axios.post(`${LOCALHOST_URL}/products/create`, objProduct);
+            return dispatch({
+                type: "CREATE_PRODUCT",
+                payload: products.data.product,
+            })
         } catch (error) {
             console.log("Error al crear producto")   
         }
     }
 }
-
-// // FILTROS Y ORDENAMIENTOS //
-// export const getProductsByPriceAsc = () => {
-//     return {
-//         type: ORDER_PRICE_ASC
-//     }
-// };
-
-// export const getProductsByPriceDesc = () => {
-//     return {
-//         type: ORDER_PRICE_DESC
-//     }
-// };
-
-// export const filterProductsByPriceLessThan = (price) => {
-//     return {
-//         type: FILTER_PRICE_ONLY_LESSTHAN,
-//         payload: price
-//     }
-// }
-
-// export const filterProductsByPriceMoreThan = (price) => {
-//     return {
-//         type: FILTER_PRICE_ONLY_MORETHAN,
-//         payload: price
-//     }
-// }
-
-// export const filterProductsByPriceRange = (price1, price2) => {
-//     return {
-//         type: FILTER_PRICE_RANGE,
-//         payload: { price1, price2 }
-//     }
-// }

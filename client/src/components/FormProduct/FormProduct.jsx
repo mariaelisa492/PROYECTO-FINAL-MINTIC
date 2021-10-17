@@ -61,6 +61,17 @@ export const FormProduct = ({inputProducts, setInputProducts}) => {
               onChange={evt => handleInputChange(evt.target.value, 'stock')}
             />
           </InputGroup>
+          <br />
+          <InputGroup size="lg">
+            <InputGroup.Text id="inputGroup-sizing-lg">* Seller Document</InputGroup.Text>
+            <FormControl
+              id="sellerDocument"
+              aria-label="sellerDocument"
+              aria-describedby="inputGroup-sizing-sm"
+              value={inputProducts.sellerDocument}
+              onChange={evt => handleInputChange(evt.target.value, 'sellerDocument')}
+            />
+          </InputGroup>
     </div>
     
   )

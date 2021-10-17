@@ -12,9 +12,9 @@ const Sidebar = () => {
                 <img src={logoUser} width="100" height="100" alt="user" />
                 <h3>Admin</h3>
                 <ul>
-                    <li><Link to={'/sales'}><i><MdProductionQuantityLimits /></i> Ventas</Link></li>
-                    <li><Link to={'/products'}><i><MdOutlineAddBusiness /></i> Productos</Link></li>
-                    <li><Link to={'/sellers'}><i><AiOutlineUsergroupAdd /></i> Vendedores</Link></li>
+                    <li><Link to={'/sales'}><i><MdProductionQuantityLimits /></i> Sales</Link></li>
+                    <li><Link to={'/products'}><i><MdOutlineAddBusiness /></i> Products</Link></li>
+                    <li><Link to={'/sellers'}><i><AiOutlineUsergroupAdd /></i> Sellers</Link></li>
                 </ul>
             </div>
             <div>

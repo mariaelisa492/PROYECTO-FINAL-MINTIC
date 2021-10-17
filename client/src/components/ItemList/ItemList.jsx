@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import "./itemList.css";
-
+import "./itemList.scss";
 
 export const ItemList = ({ columns, items, titleTable, setShow}) => {
     const [pending, setPending] = useState(true);
@@ -15,9 +14,8 @@ export const ItemList = ({ columns, items, titleTable, setShow}) => {
     const handleShow = () => setShow(true);
 
     return (
-        <>
             <div className="add-button-div">
-                <div>
+                <div className="table">
                     <DataTable
                         columns={columns}
                         data={items}
@@ -26,13 +24,14 @@ export const ItemList = ({ columns, items, titleTable, setShow}) => {
                         striped
                         highlightOnHover
                         pointerOnHover
+                        paginationPerPage = {5}
+                        paginationRowsPerPageOptions = {[5,8]}
                         pagination
                     />
                 </div>
-                <div >
+                <div className="create">
                     <button className="add-button" onClick={handleShow}>Create</button>
                 </div>
             </div>
-        </>
     );
 };
