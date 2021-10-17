@@ -1,9 +1,6 @@
 import {
-	GET_PRODUCTS, GET_BYNAME,
-	ORDER_PRICE_ASC, ORDER_PRICE_DESC,
-	FILTER_PRICE_ONLY_LESSTHAN, FILTER_PRICE_ONLY_MORETHAN,
-	FILTER_PRICE_RANGE, DELETE_PRODUCT
-} from "../constants/index"
+	GET_PRODUCTS, GET_BYNAME, DELETE_PRODUCT, CREATE_PRODUCT
+} from "../constants/index";
 
 const initialState = {
 	users: [],
@@ -29,45 +26,16 @@ export const rootReducer = (state = initialState, action) => {
 			};
 
 		case DELETE_PRODUCT:
-			let deletedProduct = state.products.filter(el => el._id !== action.payload._id)
+			let deletedProduct = state.products.filter(product => product._id !== action.payload._id)
 			return {
 				...state,
 				products: [...deletedProduct]
 			};
 
-		case ORDER_PRICE_ASC:
-			let sortedPriceAsc = state.filteredProducts.sort((a, b) => (a.price > b.price) ? 1 : -1)
+		case CREATE_PRODUCT:
 			return {
 				...state,
-				filteredProducts: [...sortedPriceAsc]
-			};
-
-		case ORDER_PRICE_DESC:
-			let sortedPriceDesc = state.filteredProducts.sort((a, b) => (a.price > b.price) ? -1 : 1)
-			return {
-				...state,
-				filteredProducts: [...sortedPriceDesc]
-			};
-
-		case FILTER_PRICE_ONLY_LESSTHAN:
-			let filt1 = state.filteredProducts.filter((e) => e.price < action.payload)
-			return {
-				...state,
-				filteredProducts: [...filt1]
-			};
-
-		case FILTER_PRICE_ONLY_MORETHAN:
-			let filt2 = state.filteredProducts.filter((e) => e.price > action.payload)
-			return {
-				...state,
-				filteredProducts: [...filt2]
-			};
-
-		case FILTER_PRICE_RANGE:
-			let filt3 = state.filteredProducts.filter((e) => e.price > action.payload.price1 && e.price < action.payload.price2)
-			return {
-				...state,
-				filteredProducts: [...filt3]
+				products: []
 			};
 
 		default:

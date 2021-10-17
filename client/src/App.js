@@ -5,8 +5,14 @@ import { Login } from './pages/Login';
 import { Products } from './pages/Products';
 import { Seller } from './pages/Seller';
 import { Sales } from './pages/Sales';
+import { useDispatch } from 'react-redux';
+import { getProducts } from './redux/actions/index';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
   return (
     <div className="App">
       <Switch>
