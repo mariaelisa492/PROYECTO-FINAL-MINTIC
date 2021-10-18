@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { ItemList } from '../components/ItemList/ItemList';
 import Sidebar from "../components/SideBar/SideBar";
-import "./products.scss"
-import { useDispatch, useSelector } from 'react-redux'
-import { createProduct, deleteProduct } from "../redux/actions/index";
-// import { getProducts } from '../redux/actions'
+import "./products.scss";
+import { useDispatch, useSelector } from 'react-redux';
+import { createProduct, deleteProduct, updateProduct } from "../redux/actions/index";
 import { MdDeleteForever } from 'react-icons/md';
 import { FaRegEdit } from 'react-icons/fa';
-import { Button, Modal} from "react-bootstrap";
-import {FormProduct} from "../components/FormProduct/FormProduct"
+import {Popup} from '../components/Popup/Popup';
 
 export const Products = () => {
 
     //estados de intput y errores
-    const [inputProducts, setInputProducts] = useState({
+    const [inputItems, setInputItems] = useState({
+        id : '',
         name: '',
         description: '',
-        // image: '',
+        image: '',
         price: '',
         stock: '',
         sellerDocument: ''
@@ -26,6 +25,9 @@ export const Products = () => {
     const products = useSelector(state => state.products);
     const [items, setItems] = useState(products);
     const titleTable = "Products";
+    const [titlePopup, setTitlePopup] = useState('Create product');
+    const [btnTitle, setBtnTitle] = useState('Create');
+    const [size, setSize] = useState('');
     const columns = [
         {
             name: "Name",
@@ -54,20 +56,19 @@ export const Products = () => {
         },
         {
             name: "Actions",
-            cell: row => (<div className="actions"> <button type="button"><FaRegEdit /></button><button type="button" onClick={() => handleDeleteProduct(row)}><MdDeleteForever /></button></div>)
+            cell: row => (<div className="actions"> <button type="button" onClick={() => handleEdit(row)}><FaRegEdit /></button><button type="button" onClick={() => handleDeleteProduct(row)}><MdDeleteForever /></button></div>)
         }
     ]
 
     useEffect(() => {
-        // dispatch(getProducts())
         setItems(products)
     }, [products])
 
     const handleClose = () => {
-        setInputProducts({
+        setInputItems({
             name: '',
             description: '',
-            // image: '',
+            image: '',
             price: '',
             stock: '',
             sellerDocument: ''
@@ -75,9 +76,21 @@ export const Products = () => {
         setShow(false)
       };
 
-      const handleCreateProduct = () => {
-          dispatch(createProduct(inputProducts));
+      const handleChange = () => {
+          if(btnTitle === 'Create'){
+              dispatch(createProduct(inputItems));
+          }else{
+              dispatch(updateProduct(inputItems));
+          }
           handleClose()
+      }
+
+      const handleEdit = (row) => {
+        setTitlePopup('Update product');
+        setBtnTitle('Update');
+        setSize('lg');
+        setShow(true);
+        setInputItems(row);
       }
 
       const handleDeleteProduct = (row) => {
@@ -94,22 +107,7 @@ export const Products = () => {
                     <ItemList columns={columns} items={items} titleTable={titleTable} setShow={setShow}/>
                 </div>
             </div>
-            <Modal show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Create product</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <FormProduct inputProducts={inputProducts} setInputProducts={setInputProducts}/>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleCreateProduct}>
-                        Create
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <Popup title={titlePopup} size={size} show={show} handleChange={handleChange} handleClose={handleClose} inputItems={inputItems} setInputItems={setInputItems} btnTitle={btnTitle}/>
         </>
     )
 }

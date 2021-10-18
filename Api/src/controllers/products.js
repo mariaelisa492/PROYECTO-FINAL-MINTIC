@@ -54,8 +54,11 @@ const updateProduct = async (req, res) => {
     const { name, description, image, price, stock, sellerDocument, isActive } = req.body;
     try {
         const updateProduct = { name, description, image, price, stock, sellerDocument, isActive, _id:id }
-        await Products.findByIdAndUpdate(id, updateProduct, { new: true });
-        res.status(200).json(updateProduct);
+        const product = await Products.findByIdAndUpdate(id, updateProduct, { new: true });
+        res.status(200).json({
+            message: "Update Succefulyl",   //agregado exitosamente
+            product
+        });
     }catch (error) {
         res.status(400).json({
         error: 'Your request could not be processed. Please try again.'
