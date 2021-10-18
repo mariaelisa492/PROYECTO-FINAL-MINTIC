@@ -1,5 +1,5 @@
 import {
-	GET_PRODUCTS, GET_BYNAME, DELETE_PRODUCT, CREATE_PRODUCT
+	GET_PRODUCTS, GET_BYNAME, DELETE_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT
 } from "../constants/index";
 
 const initialState = {
@@ -35,7 +35,15 @@ export const rootReducer = (state = initialState, action) => {
 		case CREATE_PRODUCT:
 			return {
 				...state,
-				products: []
+				products: [...state.products, action.payload]
+			};
+
+		case UPDATE_PRODUCT:
+			let index = state.products.findIndex( product => product._id === action.payload._id);
+			state.products[index] = action.payload;
+			return {
+				...state,
+				products: [...state.products]
 			};
 
 		default:
