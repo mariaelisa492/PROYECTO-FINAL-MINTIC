@@ -10,7 +10,7 @@ const createOrder = async (req, res) => {
         totalPrice: req.body.totalPrice,
         status: req.body.status
     });
-    console.log(newProduct)
+    console.log(newOrder)
     try {
         const order = await newOrder.create();
         res.status(200).json({
@@ -35,9 +35,21 @@ const ordersAll = async (req, res) => {
     }
 };
 
+const orderId = async (req, res) => {
+    const {id} = req.params;
+    try {
+        const orderid = await Orders.findById(id);
+        res.status(200).json(orderid);
+    } catch (error) {
+        res.status(400).json({ 
+            message: "Cannot get the orders"
+        });
+    }
+};
 
 
 module.exports = {
     createOrder,
-    ordersAll
+    ordersAll,
+    orderId
 }

@@ -10,7 +10,7 @@ const OrderSchema = new Schema({
         type: Array, 
         default: [] 
     },
-    nameCustomer: {
+    nameCustome: {
         type: String
     },
     quantity: {

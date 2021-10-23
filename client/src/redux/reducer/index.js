@@ -1,5 +1,5 @@
 import {
-	GET_PRODUCTS, GET_BYNAME, DELETE_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT
+	GET_PRODUCTS, GET_BYNAME, DELETE_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, CREATE_SALE, GET_BYID, DELETE_SALE, UPDATE_SALE, GET_SALES
 } from "../constants/index";
 
 const initialState = {
@@ -45,6 +45,39 @@ export const rootReducer = (state = initialState, action) => {
 				...state,
 				products: [...state.products]
 			};
+			case GET_SALES:
+				return {
+					...state,
+					sales: action.payload,
+					filteredSales: action.payload
+				};
+	
+			case GET_BYID:
+				return {
+					...state,
+					filteredSales: [...action.payload]
+				};
+	
+			case DELETE_SALE:
+				let deletedSales = state.sales.filter(sale => sale._id !== action.payload._id)
+				return {
+					...state,
+					sales: [...deletedSales]
+				};
+	
+			case CREATE_SALE:
+				return {
+					...state,
+					sales: [...state.sales, action.payload]
+				};
+	
+			case UPDATE_SALE:
+				let indexS = state.sales.findIndex( sale => sale._id === action.payload._id);
+				state.sales[indexS] = action.payload;
+				return {
+					...state,
+					sale: [...state.sales]
+				};
 
 		default:
 			return state;
