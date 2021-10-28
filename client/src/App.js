@@ -7,6 +7,9 @@ import { Seller } from './pages/Seller';
 import { Sales } from './pages/Sales';
 import { useDispatch } from 'react-redux';
 import { getProducts } from './redux/actions/index';
+import { Logout } from './pages/Logout';
+import { Profile } from './pages/Profile';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -16,9 +19,9 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/profile" component={Profile}/>
         <Route exact path="/sales" component={Sales} />
-        <Route exact path="/products" component={Products} />
+        <Route exact path="/" component={Products} />
         <Route exact path="/sellers" component={Seller} />
       </Switch>
     </div>
